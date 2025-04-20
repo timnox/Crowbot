@@ -27,5 +27,9 @@
     "randomstring": "^1.2.1",
     "request": "^2.88.2",
     "superagent": "^6.1.0"
+  },
+  "engines": {
+    "node": "18.20.8",
+    "npm": "7.24.2"
   }
 }
