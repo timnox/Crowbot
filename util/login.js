@@ -1,29 +1,33 @@
-const {
-    readdirSync
-} = require('fs');
+require("dotenv").config(); // Charge les variables d'environnement
+
+const { readdirSync } = require("fs");
 
 const login = (client) => {
-    const Discord = require("discord.js")
-    const logs = require('discord-logs');
-    logs(client)
-    const disbut = require('discord-buttons');
-    disbut(client);
-    const tempo = require("./gestion/tempo.js");
-    tempo(client)
+    const Discord = require("discord.js");
+    const logs = require("discord-logs");
+    logs(client);
 
-    client.config = require("../config.json")
-    client.cooldown = new Array();
-    client.interaction = {}
+    const disbut = require("discord-buttons");
+    disbut(client);
+
+    const tempo = require("./gestion/tempo.js");
+    tempo(client);
+
+    client.config = require("../config.json");
+    client.cooldown = [];
+    client.interaction = {};
     client.guildInvites = new Map();
     client.queue = new Map();
-    client.commands = new Discord.Collection()
-    client.aliases = new Discord.Collection()
-    client.snipes = new Map()
-    client.inter = new Array()
+    client.commands = new Discord.Collection();
+    client.aliases = new Discord.Collection();
+    client.snipes = new Map();
+    client.inter = [];
 
-    client.login("MTM1NjcxNTAyODQwODk2MzMxMw.GqasJ-.WOgjEYohLM8Fn2egBTFpZoEHOfuQK_WShUbZdE");
-}
+    // Connexion avec le token depuis .env
+    client.login(process.env.DISCORD_TOKEN);
+
+};
 
 module.exports = {
     login
-}
+};
