@@ -151,87 +151,52 @@ Actuel: ${secur(db.get(`antijoinbot_${client.user.id}`))}
                         }
 
                         if (button.id === "troispr" + message.id) {
-
-                            button.reply.defer(true)
-                            let question = await message.channel.send("Quel est **le nouveau type d'activiter du bot ?** (\`play\`, \`stream\`, \`watch\`, \`listen\`)")
+                            button.reply.defer(true);
+                            let question = await message.channel.send("Quel est **le nouveau type d'activiter du bot ?** (`play`, `stream`, `watch`, `listen`)");
                             const filter = m => message.author.id === m.author.id;
-
+                        
                             message.channel.awaitMessages(filter, {
                                 max: 1,
                                 time: 60000 * 5,
                                 errors: ['time']
                             }).then(async (collected) => {
-                                collected.first().delete()
-                                question.delete()
-                                let type = ""
-
+                                collected.first().delete();
+                                question.delete();
+                                let type = "";
+                        
                                 if (collected.first().content.toLowerCase().startsWith("play")) {
-                                    type = "PLAYING"
+                                    type = "PLAYING";
                                 } else if (collected.first().content.toLowerCase().startsWith("stream")) {
-                                    type = "STREAMING"
+                                    type = "STREAMING";
                                 } else if (collected.first().content.toLowerCase().startsWith("listen")) {
-                                    type = "LISTENING"
+                                    type = "LISTENING";
                                 } else if (collected.first().content.toLowerCase().startsWith("watch")) {
-                                    type = "WATCHING"
+                                    type = "WATCHING";
                                 } else {
-                                    return message.channel.send("Type d'activité invalide ! Recommence !")
+                                    return message.channel.send("Type d'activité invalide ! Recommence !");
                                 }
-
-                                let question2 = await message.channel.send("Quel est **la nouvelle activiter du bot ?** (*message*)")
-
+                        
+                                let question2 = await message.channel.send("Quel est **la nouvelle activiter du bot ?** (*message*)");
+                        
                                 message.channel.awaitMessages(filter, {
                                     max: 1,
                                     time: 60000 * 5,
                                     errors: ['time']
                                 }).then(async (collected2) => {
-                                    collected2.first().delete()
-                                    question2.delete()
-
-                                    client.user.setActivity(collected2.first().content, {
-                                        type: type,
-                                        url: "https://github.com/4wip"
-                                    }).then(async (a) => {
-                                        updateEmbed(msg, client)
-                                    })
+                                    collected2.first().delete();
+                                    question2.delete();
+                        
+                                    // ✅ MET L'URL TWITCH POUR L'ICÔNE VIOLETTE SI TYPE = STREAMING
+                                    const activityOptions = {
+                                        type: type
+                                    };
+                                    if (type === "STREAMING") {
+                                        activityOptions.url = "https://www.twitch.tv/Cr0wBots"; // lien Twitch obligatoire pour le violet
+                                    }
+                        
+                                    client.user.setActivity(collected2.first().content, activityOptions).then(async () => {
+                                        updateEmbed(msg, client);
+                                    });
                                 });
-                            })
-                        }
-
-                        if (button.id === "quattrepr" + message.id) {
-
-                            button.reply.defer(true)
-                            let question = await message.channel.send(`Quel est **la nouvelle presence du bot ?** (\`dnd\`, \`idle\`, \`online\`, \`invisible\`)`)
-                            const filter = m => message.author.id === m.author.id;
-
-                            message.channel.awaitMessages(filter, {
-                                max: 1,
-                                time: 60000,
-                                errors: ['time']
-                            }).then(async (collected) => {
-                                collected.first().delete()
-                                question.delete()
-                                let type = ""
-
-                                if (collected.first().content.toLowerCase().startsWith("dnd")) {
-                                    type = "dnd"
-                                } else if (collected.first().content.toLowerCase().startsWith("idle")) {
-                                    type = "idle"
-                                } else if (collected.first().content.toLowerCase().startsWith("online")) {
-                                    type = "online"
-                                } else if (collected.first().content.toLowerCase().startsWith("invisible")) {
-                                    type = "invisible"
-                                } else {
-                                    return message.channel.send(`Presence incorect ! Recommence !`)
-                                }
-                                client.user.setPresence({
-                                    status: type
-                                }).then(async (a) => {
-                                    updateEmbed(msg, client)
-                                })
                             });
                         }
-                    })
-                })
-            }
-        }
-    }
