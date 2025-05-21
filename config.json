@@ -1,15 +1,15 @@
 {
-    "color": "#fc4af2",
+    "color": "#625f62",
     "prefix": "+",
-    "name": "KYP-Shop",
+    "name": "DGSI-FR",
     "defaultjoinmessage": "{user} vient de rejoindre. Il a été invité par **{inviter:name}** qui a désormais **{invite} invitations** !",
     "defaultleavemessage": "{user} vient de quitter. Il avais été invité par **{inviter:name}** qui a désormais **{invite} invitations** ",
     "defaultLevelmessage": "**{user}** vient de passer au level **{level}** bravo à lui !",
     "owner": [
         "1129754567815463012", 
-        "1330971311610003580"
+        "1187457929020985507"
     ],
     "activity": "streaming",
-    "statut": "KYP-Shop",
+    "statut": "DGSI-FR",
     "twitchUrl": "https://www.twitch.tv/Cr0wBots"
 }

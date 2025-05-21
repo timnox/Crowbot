@@ -68,7 +68,7 @@ client.once('ready', () => {
 
     // Définir l'activité de streaming
     const activity = {
-        name: 'KYP-Shop en direct', // Le texte que tu veux afficher
+        name: 'DGSI-FR en direct', // Le texte que tu veux afficher
         type: Discord.ActivityType.Streaming, // Définit l'activité en mode streaming
         url: "https://www.twitch.tv/ton_chaine_twitch" // Remplace avec ton lien Twitch
     };
